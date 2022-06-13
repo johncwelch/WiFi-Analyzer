@@ -101,7 +101,8 @@ struct ContentView: View {
 					    .frame(width: 140.0,height: 22.0,alignment: .leading)
 
 				    Button("Create New File") {
-					    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+					    let saveURL = showSavePanel()
+					    print(saveURL)
 				    }
 				    .padding(.top)
 				    Button("Append to File") {
@@ -137,6 +138,7 @@ struct ContentView: View {
 					    /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
 				    }
 				    .padding(.top)
+
 				    Button("Track") {
 					    if(!timerState) {
 						    print("timer off")
@@ -165,10 +167,8 @@ struct ContentView: View {
 					    }
 			    }
 		    }
-
+		    Spacer()
 	    }
-	    .frame(width: 785.0, height: 212.0)
-	    //rough equivalent of awakefromnib()
 	    .onAppear {
 		    //set up the SSID value
 		    //redo this with a function that returns all the info we need
@@ -177,9 +177,13 @@ struct ContentView: View {
 		    //theCurrentTime = getCurrentTime()
 		    self.theCurrentTime = getCurrentTime()
 		    self.stopTimer()
+
 	    }
-	    .accessibilityLabel("SSID Label")
+	    .frame(width: 785.0, height: 212.0)
     }
+
+
+
 	//stop the timer
 	func stopTimer() {
 		self.theTimer.upstream.connect().cancel()
@@ -188,6 +192,7 @@ struct ContentView: View {
 		self.theTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	}
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
