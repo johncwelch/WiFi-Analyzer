@@ -43,18 +43,24 @@ struct ContentView: View {
 					    .padding(.leading, 20.0)
 					    .frame(width: 115.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
+					    .accessibilityLabel("SSID Label")
+					    .accessibilityIdentifier("ssidLabel")
 				    Text("WAP MAC:")
 					    .font(.body)
 					    .fontWeight(.semibold)
 					    .padding(.leading, 20.0)
 					    .frame(width: 115.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
+					    .accessibilityLabel("WAP MAC Label")
+					    .accessibilityIdentifier("wapMACLabel")
 				    Text("Channel:")
 					    .font(.body)
 					    .fontWeight(.semibold)
 					    .padding(.leading, 20.0)
 					    .frame(width: 115.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
+					    .accessibilityLabel("Wireless Channel Label")
+					    .accessibilityIdentifier("wirelessChannelLabel")
 				    Toggle(isOn: $writeToFile) {
 					    Text("Write To File")
 				    }
@@ -66,12 +72,18 @@ struct ContentView: View {
 					    .fontWeight(.regular)
 					    .frame(width: 162.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
+					    .accessibilityLabel("Name of current WiFi network")
+					    .accessibilityIdentifier("ssidName")
 				    Text("\(currentWAPMAC)")
 					    .frame(width: 162.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
+					    .accessibilityLabel("MAC Address of connected Access Point")
+					    .accessibilityIdentifier("wapMACAddress")
 				    Text("\(currentChannel)")
 					    .frame(width: 162.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
+					    .accessibilityLabel("Current Wireless Channel")
+					    .accessibilityIdentifier("wirelessChannel")
 			    }
 
 			    VStack(alignment: .leading) {
@@ -147,7 +159,8 @@ struct ContentView: View {
 					    .frame(width: 162.0,height: 22.0,alignment: .leading)
 						//update the clock value
 					    .onReceive(theTimer) {
-						    //theCurrentTime = timeFormatter.string(from: Date())
+						    //this sets up the field to update at the timer
+						    //frequency
 						    input in theCurrentTime = getCurrentTime()
 					    }
 			    }
@@ -165,6 +178,7 @@ struct ContentView: View {
 		    self.theCurrentTime = getCurrentTime()
 		    self.stopTimer()
 	    }
+	    .accessibilityLabel("SSID Label")
     }
 	//stop the timer
 	func stopTimer() {
