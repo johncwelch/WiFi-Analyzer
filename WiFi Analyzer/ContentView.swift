@@ -179,7 +179,15 @@ struct ContentView: View {
 		    self.stopTimer()
 
 	    }
-	    .frame(width: 785.0, height: 212.0)
+	   .frame(width: 785.0, height: 212.0)
+	   .fixedSize()
+	    
+	   .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification), perform: { _ in
+		   NSApp.mainWindow?.standardWindowButton(.zoomButton)?.isHidden = true
+		   NSApp.mainWindow?.contentRect(forFrameRect: NSRect(x: 0, y: 0, width: 785, height: 212))
+		   NSApp.mainWindow?.styleMask = [.titled, .closable, .miniaturizable]
+			}
+		)
     }
 
 
