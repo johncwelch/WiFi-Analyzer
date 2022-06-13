@@ -33,7 +33,7 @@ struct ContentView: View {
 	//timer on/off var
 	@State private var timerState: Bool = false
 
-    var body: some View {
+	var body: some View {
 	    VStack(alignment: .leading) {
 		    HStack(alignment: .top) {
 			    VStack(alignment: .leading) {
@@ -200,6 +200,8 @@ struct ContentView: View {
 		self.theTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	}
 }
+
+
 
 
 struct ContentView_Previews: PreviewProvider {
