@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.113.202 clang-1400.0.16.2)"
+options: "86098d84dc42e9423fb1b987513fbd0d973967b3ee33cb6c4c22d7ff5280d8fa"
+build_start_time: [1654831153, 786703109]
+build_end_time: [1654831153, 840520858]
+inputs:
+  "/Users/jwelch/Library/CloudStorage/OneDrive-Home/Documents/Swift Projects/WiFi Analyzer/WiFi Analyzer/ContentView.swift": !private [1654831153, 301868438]
+  "/Users/jwelch/Library/CloudStorage/OneDrive-Home/Documents/Swift Projects/WiFi Analyzer/WiFi Analyzer/WiFi_AnalyzerApp.swift": !private [1654826410, 799479484]

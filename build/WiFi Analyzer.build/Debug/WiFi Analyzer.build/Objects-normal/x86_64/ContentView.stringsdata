@@ -1,0 +1,104 @@
+{
+  "source": "/Users/jwelch/Library/CloudStorage/OneDrive-Home/Documents/Swift Projects/WiFi Analyzer/WiFi Analyzer/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "SSID Label"
+      },
+      {
+        "comment": "",
+        "key": "SSID:"
+      },
+      {
+        "comment": "",
+        "key": "WAP MAC:"
+      },
+      {
+        "comment": "",
+        "key": "Channel:"
+      },
+      {
+        "comment": "",
+        "key": "WAP MAC Label"
+      },
+      {
+        "comment": "",
+        "key": "Wireless Channel Label"
+      },
+      {
+        "comment": "",
+        "key": "Write To File"
+      },
+      {
+        "comment": "",
+        "key": "%@"
+      },
+      {
+        "comment": "",
+        "key": "Name of current WiFi network"
+      },
+      {
+        "comment": "",
+        "key": "MAC Address of connected Access Point"
+      },
+      {
+        "comment": "",
+        "key": "Current Wireless Channel"
+      },
+      {
+        "comment": "",
+        "key": "Signal Strength (dBm):"
+      },
+      {
+        "comment": "",
+        "key": "Signal Noise (dBm):"
+      },
+      {
+        "comment": "",
+        "key": "Signal To Noise (dBm):"
+      },
+      {
+        "comment": "",
+        "key": "Create New File"
+      },
+      {
+        "comment": "",
+        "key": "Append to File"
+      },
+      {
+        "comment": "",
+        "key": "%lld"
+      },
+      {
+        "comment": "",
+        "key": "Auth Mode:"
+      },
+      {
+        "comment": "",
+        "key": "Data Rate (Mbps):"
+      },
+      {
+        "comment": "",
+        "key": "Current Time:"
+      },
+      {
+        "comment": "",
+        "key": "Refresh"
+      },
+      {
+        "comment": "",
+        "key": "Track"
+      },
+      {
+        "comment": "",
+        "key": "Auth Mode"
+      },
+      {
+        "comment": "",
+        "key": "%lf"
+      }
+    ]
+  },
+  "version": 1
+}
