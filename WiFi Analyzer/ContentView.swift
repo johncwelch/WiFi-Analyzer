@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreWLAN
 
 struct ContentView: View {
 	//SSID value
@@ -32,6 +33,10 @@ struct ContentView: View {
 	@State private var theTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	//timer on/off var
 	@State private var timerState: Bool = false
+
+	//create interface instance
+	@State private var theWifiInterface: CWInterface = getWifiInterface()
+	
 
 	var body: some View {
 	    VStack(alignment: .leading) {
@@ -173,7 +178,10 @@ struct ContentView: View {
 		    //set up the SSID value
 		    //redo this with a function that returns all the info we need
 		    //maybe as a tuple, probably as a struck so return.SSID etc.
-		    currentSSID = currentSSIDs()
+		    //currentSSID = currentSSIDs()
+		    //we have to force-unwrapt this to work
+		    currentSSID = theWifiInterface.ssid()!
+		    currentWAPMAC = currentBSSIDs()
 		    //theCurrentTime = getCurrentTime()
 		    self.theCurrentTime = getCurrentTime()
 		    self.stopTimer()

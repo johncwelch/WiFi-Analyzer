@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		706A92E5285902CB004F9C93 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706A92E4285902CB004F9C93 /* NetworkExtension.framework */; };
 		707EC1942852DD2A00F18516 /* WiFi_AnalyzerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707EC1932852DD2A00F18516 /* WiFi_AnalyzerApp.swift */; };
 		707EC1962852DD2A00F18516 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707EC1952852DD2A00F18516 /* ContentView.swift */; };
 		707EC1982852DD2D00F18516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707EC1972852DD2D00F18516 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		706A92E4285902CB004F9C93 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		707EC1902852DD2A00F18516 /* WiFi Analyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WiFi Analyzer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		707EC1932852DD2A00F18516 /* WiFi_AnalyzerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFi_AnalyzerApp.swift; sourceTree = "<group>"; };
 		707EC1952852DD2A00F18516 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,17 +29,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				706A92E5285902CB004F9C93 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		706A92E3285902CA004F9C93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				706A92E4285902CB004F9C93 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		707EC1872852DD2A00F18516 = {
 			isa = PBXGroup;
 			children = (
 				707EC1922852DD2A00F18516 /* WiFi Analyzer */,
 				707EC1912852DD2A00F18516 /* Products */,
+				706A92E3285902CA004F9C93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

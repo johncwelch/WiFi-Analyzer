@@ -40,6 +40,30 @@ func currentSSIDs() -> String {
 		return wifiSSID!
 }
 
+func currentBSSIDs() -> String {
+	//assign var to wifi object
+	let wifiClient = CWWiFiClient.shared()
+	//set wifiInterface to "main/default" interface
+	let wifiInteface = wifiClient.interface()
+	//pull the SSID if there is one
+	//let wifiBSSID = wifiInteface?.bssid()
+	if let wifiBSSID = wifiInteface?.bssid(){
+		return wifiBSSID
+	} else {
+		let wifiBSSID = "no BSSID"
+		return wifiBSSID
+	}
+
+}
+
+func getWifiInterface() -> CWInterface {
+	let theWirelessClient = CWWiFiClient.shared()
+	let theWirelessInterface = theWirelessClient.interface()
+	return theWirelessInterface!
+}
+
+
+
 //get the time in hh:mm:ss, return as sstring
 //doesn't seem to be needed, may remove.
 func getCurrentTime() -> String {
@@ -54,6 +78,7 @@ func getCurrentTime() -> String {
 	//return the string
 	return theTime
 }
+
 
 //keeping for syntax examples
 /*var timeFormatter : DateFormatter {
