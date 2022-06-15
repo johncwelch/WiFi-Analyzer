@@ -108,6 +108,50 @@ func getCWChannelNumber() -> Int {
 	}
 }
 
+func getRSSI() -> Int {
+	//we don't need to check for nil here, you either get a valid RSSI
+	//or it returns 0
+	let theRSSI = theWifiInterface.rssiValue()
+	return theRSSI
+}
+
+//insert PE joke here, because this function literally brings the noise
+//same as with rssi, returns noise measurement or 0
+func getNoise() -> Int {
+	let theNoise = theWifiInterface.noiseMeasurement()
+	return theNoise
+}
+
+func getTransmitRate() -> String {
+	let theFormatter = NumberFormatter()
+	//formatter properties
+	theFormatter.numberStyle = .decimal
+	theFormatter.maximumFractionDigits = 2
+	//no need for nil check, returns 0 or actual rate in MBps
+	let theRate = theWifiInterface.transmitRate()
+	let NSNumberTransmitRate = NSNumber(value: theRate)
+	let formattedTransmitRate = theFormatter.string(from: NSNumberTransmitRate)
+	return formattedTransmitRate!
+}
+
+//set up SNR. We're using NumberFormatter to limit decmial places shown
+func getSNR(theSig: Int, theNoise: Int) -> String {
+	let theFormatter = NumberFormatter()
+	//formatter properties
+	theFormatter.numberStyle = .decimal
+	theFormatter.maximumFractionDigits = 2
+	//calculate SNR
+	let signalAsFloat = Float(theSig)
+	let noiseAsFloat = Float(theNoise)
+	let theSNR = signalAsFloat / noiseAsFloat
+	//format SNR
+	//first convert to NSNumber since that's what NumberFormatteer requires
+	let NSNumberSNR = NSNumber(value: theSNR)
+	//convert the NSNumber version of the float to a formatted string
+	let formattedSNR = theFormatter.string(from: NSNumberSNR)
+	return formattedSNR!
+}
+
 //get the time in hh:mm:ss, return as sstring
 //doesn't seem to be needed, may remove.
 func getCurrentTime() -> String {

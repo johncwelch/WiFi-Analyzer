@@ -1,9 +1,10 @@
 //
-//  ContentView.swift
-//  WiFi Analyzer
+//	ContentView.swift
+// 	WiFi Analyzer
 //
-//  Created by John Welch on 6/9/22.
-//
+// 	Created by John Welch on 6/9/22.
+//	Note that the get<thing> functions are in WiFI_AnalyzerApp.swift
+//		Not here.
 
 import SwiftUI
 import CoreWLAN
@@ -20,9 +21,11 @@ struct ContentView: View {
 	//signal noise in dbm
 	@State private var signalNoise: Int = 0
 	//SNR in dbm
-	@State private var signalToNoise: Int = 0
+	//done as string for numberformatter needs
+	@State private var signalToNoise: String = "0.0"
 	//data rate in Mbps
-	@State private var dataRate: Double = 0.0
+	//done as string for numberFormatteer needs
+	@State private var dataRate: String = "0.0"
 	//current time
 	@State private var theCurrentTime: String = ""
 
@@ -180,8 +183,17 @@ struct ContentView: View {
 		    //get BSSID
 		    currentWAPMAC = getBSSID()
 		    //get the Wifi Channel. if it's a zero,
-		    //channel is actuall nuially nil
+		    //channel is actually nil
 		    currentChannel = getCWChannelNumber()
+		    //set up the RSSI
+		    signalStrength = getRSSI()
+		    //BRING THA NOIZE
+		    signalNoise = getNoise()
+		    //get the SNR as a formatted string via NumberFormatter
+		    signalToNoise = getSNR(theSig: signalStrength, theNoise: signalNoise)
+		    //get transmit rate
+		    dataRate = getTransmitRate()
+
 		    self.theCurrentTime = getCurrentTime()
 		    self.stopTimer()
 
@@ -207,6 +219,7 @@ struct ContentView: View {
 	func startTimer() {
 		self.theTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	}
+	
 }
 
 
