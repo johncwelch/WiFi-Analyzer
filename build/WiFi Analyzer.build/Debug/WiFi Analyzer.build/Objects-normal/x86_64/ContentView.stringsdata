@@ -36,6 +36,10 @@
       },
       {
         "comment": "",
+        "key": "%lld"
+      },
+      {
+        "comment": "",
         "key": "Name of current WiFi network"
       },
       {
@@ -65,10 +69,6 @@
       {
         "comment": "",
         "key": "Append to File"
-      },
-      {
-        "comment": "",
-        "key": "%lld"
       },
       {
         "comment": "",

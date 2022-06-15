@@ -28,25 +28,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 //timer go here?
 
-//this will eventually return more
-func currentSSIDs() -> String {
+//moved into contentview. That may be reversed, I haven't decided yet.
+
+//the current*SSIDs functions replaced with functions based on getWifiInterface()
+//keeping as a learning tool
+
+/*func currentSSIDs() -> String {
 		//assign var to wifi object
 		let wifiClient = CWWiFiClient.shared()
 		//set wifiInterface to "main/default" interface
 		let wifiInteface = wifiClient.interface()
 		//pull the SSID if there is one
-		let wifiSSID = wifiInteface?.ssid()
+	if let wifiSSID = wifiInteface?.ssid() {
 		//return the SSID (it's a string)
-		return wifiSSID!
-}
+		return wifiSSID
+	} else {
+		let wifiSSID = "no SSID"
+		return wifiSSID
+	}
 
-func currentBSSIDs() -> String {
+}*/
+
+/*func currentBSSIDs() -> String {
 	//assign var to wifi object
 	let wifiClient = CWWiFiClient.shared()
 	//set wifiInterface to "main/default" interface
 	let wifiInteface = wifiClient.interface()
-	//pull the SSID if there is one
-	//let wifiBSSID = wifiInteface?.bssid()
+	//pull the BSSID if there is one
+	//note that CoreWLAN has an issue where bssid() always returns a nil
+	//so this is how we do it for now. Honestly, it's a good idea anyway
+	//avoids crashes
 	if let wifiBSSID = wifiInteface?.bssid(){
 		return wifiBSSID
 	} else {
@@ -54,7 +65,9 @@ func currentBSSIDs() -> String {
 		return wifiBSSID
 	}
 
-}
+}*/
+
+//functions to get information from current interface
 
 func getWifiInterface() -> CWInterface {
 	let theWirelessClient = CWWiFiClient.shared()
@@ -62,7 +75,38 @@ func getWifiInterface() -> CWInterface {
 	return theWirelessInterface!
 }
 
+//moved this from contentview to here. Probably a better place for all this
+var theWifiInterface: CWInterface = getWifiInterface()
 
+//get ssid from theWiFiInterface
+func getSSID() -> String {
+	if let theSSID  = theWifiInterface.ssid() {
+		return theSSID
+	} else {
+		let theSSID = "no SSID"
+		return theSSID
+	}
+}
+
+func getBSSID() -> String {
+	if let theBSSID = theWifiInterface.bssid() {
+		return theBSSID
+	} else {
+		let theBSSID = "no BSSID"
+		return theBSSID
+	}
+}
+
+//get channel number. That's a straight int, pretty simple. band and width
+//both have multiple possible variables, we'll add them later.
+func getCWChannelNumber() -> Int {
+	if let wirelessChannel = theWifiInterface.wlanChannel() {
+		let channelNumber = wirelessChannel.channelNumber
+		return channelNumber
+	} else {
+		return 0
+	}
+}
 
 //get the time in hh:mm:ss, return as sstring
 //doesn't seem to be needed, may remove.
@@ -78,6 +122,7 @@ func getCurrentTime() -> String {
 	//return the string
 	return theTime
 }
+
 
 
 //keeping for syntax examples

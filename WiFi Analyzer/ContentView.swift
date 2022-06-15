@@ -14,7 +14,7 @@ struct ContentView: View {
 	//current WAP MAC
 	@State private var currentWAPMAC: String = ""
 	//current WiFI channel
-	@State private var currentChannel: String = ""
+	@State private var currentChannel: Int = 0
 	//signal strength in dbm
 	@State private var signalStrength: Int = 0
 	//signal noise in dbm
@@ -35,7 +35,7 @@ struct ContentView: View {
 	@State private var timerState: Bool = false
 
 	//create interface instance
-	@State private var theWifiInterface: CWInterface = getWifiInterface()
+	//@State private var theWifiInterface: CWInterface = getWifiInterface()
 	
 
 	var body: some View {
@@ -176,13 +176,12 @@ struct ContentView: View {
 	    }
 	    .onAppear {
 		    //set up the SSID value
-		    //redo this with a function that returns all the info we need
-		    //maybe as a tuple, probably as a struck so return.SSID etc.
-		    //currentSSID = currentSSIDs()
-		    //we have to force-unwrapt this to work
-		    currentSSID = theWifiInterface.ssid()!
-		    currentWAPMAC = currentBSSIDs()
-		    //theCurrentTime = getCurrentTime()
+		    currentSSID = getSSID()
+		    //get BSSID
+		    currentWAPMAC = getBSSID()
+		    //get the Wifi Channel. if it's a zero,
+		    //channel is actuall nuially nil
+		    currentChannel = getCWChannelNumber()
 		    self.theCurrentTime = getCurrentTime()
 		    self.stopTimer()
 
@@ -198,12 +197,13 @@ struct ContentView: View {
 		)
     }
 
-
+	
 
 	//stop the timer
 	func stopTimer() {
 		self.theTimer.upstream.connect().cancel()
 	}
+	//start timer
 	func startTimer() {
 		self.theTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	}
