@@ -230,6 +230,7 @@ using UInt = size_t;
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import AppKit;
+@import CoreLocation;
 @import ObjectiveC;
 #endif
 
@@ -256,6 +257,12 @@ using UInt = size_t;
 SWIFT_CLASS("_TtC13WiFi_Analyzer11AppDelegate")
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication * _Nonnull)sender SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC13WiFi_Analyzer16locationDelegate")
+@interface locationDelegate : NSObject <CLLocationManagerDelegate>
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

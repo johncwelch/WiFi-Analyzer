@@ -10,6 +10,7 @@ import SwiftUI
 import CoreWLAN
 //import UniformTypeIdentifiers
 import Cocoa
+import CoreLocation
 
 //custom class to allow for quit on closing window
 //contrary to what you see in various places, you don't need to explicitly import a framework for this to work
@@ -17,15 +18,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
 			return true
 		}
-	/*func applicationDidFinishLaunching(_ notification: Notification) {
-		let window = NSWindow(
-			contentRect: NSRect(x: 0, y: 0, width: 785, height: 212),
-			styleMask: [.titled, .closable, .miniaturizable],
-			backing: .buffered, defer: false)
-		window.center()
-	}*/
 }
 
+@main
+struct WiFi_AnalyzerApp: App {
+	//implement AppDelegate custom class so we quit on closing window
+	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    var body: some Scene {
+	   WindowGroup {
+		   ContentView()
+				//set up the min/max size
+			   .frame(minWidth: 785, maxWidth: 785, minHeight: 212, maxHeight: 212)
+	   }
+	    //lock it down so you can't change it
+	   .windowResizability(.contentSize)
+    }
+}
 //timer go here?
 
 //moved into contentview. That may be reversed, I haven't decided yet.
@@ -67,6 +75,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 }*/
 
+//location manager function (has to be here for some reason)
+class locationDelegate: NSObject, CLLocationManagerDelegate {
+	func theLocationAuthStatus(_manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		print("changed auth status: \(status.rawValue)")
+		switch status.rawValue {
+			case 0:
+				print("Not Determined")
+			case 1:
+				print("Restricted")
+			case 2:
+				print("Denied")
+			case 3:
+				print("Authorized Always")
+			case 4:
+				print("Authorized when in use")
+			default:
+				print("None of the above")
+		}
+	}
+}
 //functions to get information from current interface
 
 func getWifiInterface() -> CWInterface {
@@ -152,6 +180,51 @@ func getSNR(theSig: Int, theNoise: Int) -> String {
 	return formattedSNR!
 }
 
+//get and parse the auth mode, return string
+func getAuthMode() -> String {
+	var authModeString: String = ""
+	//get the security mode from the interface
+	let theSecurityMode = theWifiInterface.security()
+	//test on the integer value for the mode
+	switch theSecurityMode.rawValue {
+		case 0:
+			authModeString = "None"
+		case 1:
+			authModeString = "WEP"
+		case 2:
+			authModeString = "WPA Personal"
+		case 3:
+			authModeString = "WPA PersMixed"
+		case 4:
+			authModeString = "WPA2 Personal"
+		case 5:
+			authModeString = "Personal"
+		case 6:
+			authModeString = "Dynamic WEP"
+		case 7:
+			authModeString = "WPA Enterprise"
+		case 8:
+			authModeString = "WPA EntMixed"
+		case 9:
+			authModeString = "WPA2 Enterprise"
+		case 10:
+			authModeString = "Enterprise"
+		case 11:
+			authModeString = "WPA3 Personal"
+		case 12:
+			authModeString = "WPA3 Enterprise"
+		case 13:
+			authModeString = "WPA3 Transition"
+		case 14:
+			authModeString = "OWE"
+		case 15:
+			authModeString = "OWE Trans."
+		default:
+			authModeString = "Unknown"
+	}
+	return authModeString
+}
+
 //get the time in hh:mm:ss, return as sstring
 //doesn't seem to be needed, may remove.
 func getCurrentTime() -> String {
@@ -198,15 +271,5 @@ func showSavePanel() -> URL? {
 	return response == .OK ? savePanel.url : nil
 }
 
-@main
-struct WiFi_AnalyzerApp: App {
-	//implement AppDelegate custom class so we quit on closing window
-	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
 
-    }
-}
 

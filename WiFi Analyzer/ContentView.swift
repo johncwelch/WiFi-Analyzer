@@ -8,6 +8,7 @@
 
 import SwiftUI
 import CoreWLAN
+import CoreLocation
 
 struct ContentView: View {
 	//SSID value
@@ -28,6 +29,8 @@ struct ContentView: View {
 	@State private var dataRate: String = "0.0"
 	//current time
 	@State private var theCurrentTime: String = ""
+	//security mode
+	@State private var authMode: String = ""
 
 	//checkbox state
 	@State private var writeToFile = false
@@ -37,12 +40,17 @@ struct ContentView: View {
 	//timer on/off var
 	@State private var timerState: Bool = false
 
+	@State var myLocationManager = CLLocationManager()
+
+	//@StateObject var myLocationManagerDelegate = myLocationDelegate()
+
 	//create interface instance
 	//@State private var theWifiInterface: CWInterface = getWifiInterface()
 	
 
 	var body: some View {
-	    VStack(alignment: .leading) {
+
+		VStack(alignment: .leading) {
 		    HStack(alignment: .top) {
 			    VStack(alignment: .leading) {
 				    Text("SSID:")
@@ -160,7 +168,7 @@ struct ContentView: View {
 				    }
 			    }
 			    VStack(alignment: .leading) {
-				    Text("Auth Mode")
+				    Text("\(authMode)")
 					    .frame(width: 162.0,height: 22.0,alignment: .leading)
 					    .textSelection(.enabled)
 				    Text("\(dataRate)")
@@ -169,19 +177,38 @@ struct ContentView: View {
 					    .frame(width: 162.0,height: 22.0,alignment: .leading)
 						//update the clock value
 					    .onReceive(theTimer) {
-						    //this sets up the field to update at the timer
+						    //this sets up the fields to update at the timer
 						    //frequency
 						    input in theCurrentTime = getCurrentTime()
+						    currentChannel = getCWChannelNumber()
+						    signalStrength = getRSSI()
+						    signalNoise = getNoise()
+						    signalToNoise = getSNR(theSig: signalStrength, theNoise: signalNoise)
+						    dataRate = getTransmitRate()
+						    authMode = getAuthMode()
 					    }
 			    }
 		    }
 		    Spacer()
 	    }
 	    .onAppear {
+		    let myDelegate = locationDelegate()
+		    myLocationManager.requestWhenInUseAuthorization()
+		    myLocationManager.startUpdatingLocation()
+		    myLocationManager.delegate = myDelegate
+		    myLocationManager.delegate
+		    print(myLocationManager.authorizationStatus.rawValue)
+		    let myLocationManagerAuthStatus = myLocationManager.authorizationStatus.rawValue
+		    if myLocationManagerAuthStatus == 3 || myLocationManagerAuthStatus == 4 {
+				//get BSSID
+			    print("we're authorized")
+			    currentWAPMAC = getBSSID()
+		    }
+
+
+
 		    //set up the SSID value
 		    currentSSID = getSSID()
-		    //get BSSID
-		    currentWAPMAC = getBSSID()
 		    //get the Wifi Channel. if it's a zero,
 		    //channel is actually nil
 		    currentChannel = getCWChannelNumber()
@@ -193,20 +220,14 @@ struct ContentView: View {
 		    signalToNoise = getSNR(theSig: signalStrength, theNoise: signalNoise)
 		    //get transmit rate
 		    dataRate = getTransmitRate()
-
+		    //get security mode
+		    authMode = getAuthMode()
+			//get current time
 		    self.theCurrentTime = getCurrentTime()
+		    //stop the timer
 		    self.stopTimer()
 
 	    }
-	   .frame(width: 785.0, height: 212.0)
-	   .fixedSize()
-	    
-	   .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification), perform: { _ in
-		   NSApp.mainWindow?.standardWindowButton(.zoomButton)?.isHidden = true
-		   NSApp.mainWindow?.contentRect(forFrameRect: NSRect(x: 0, y: 0, width: 785, height: 212))
-		   NSApp.mainWindow?.styleMask = [.titled, .closable, .miniaturizable]
-			}
-		)
     }
 
 	
@@ -221,9 +242,6 @@ struct ContentView: View {
 	}
 	
 }
-
-
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

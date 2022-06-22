@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		706A92E5285902CB004F9C93 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706A92E4285902CB004F9C93 /* NetworkExtension.framework */; };
 		707EC1942852DD2A00F18516 /* WiFi_AnalyzerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707EC1932852DD2A00F18516 /* WiFi_AnalyzerApp.swift */; };
 		707EC1962852DD2A00F18516 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707EC1952852DD2A00F18516 /* ContentView.swift */; };
 		707EC1982852DD2D00F18516 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707EC1972852DD2D00F18516 /* Assets.xcassets */; };
@@ -15,13 +14,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		706A92E4285902CB004F9C93 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		707EC1902852DD2A00F18516 /* WiFi Analyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WiFi Analyzer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		707EC1932852DD2A00F18516 /* WiFi_AnalyzerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFi_AnalyzerApp.swift; sourceTree = "<group>"; };
 		707EC1952852DD2A00F18516 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		707EC1972852DD2D00F18516 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		707EC19A2852DD2D00F18516 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		707EC19C2852DD2D00F18516 /* WiFi_Analyzer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFi_Analyzer.entitlements; sourceTree = "<group>"; };
+		70D4742928629548005C6E0A /* WiFi_Analyzer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFi_Analyzer.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,7 +27,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				706A92E5285902CB004F9C93 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,7 +36,6 @@
 		706A92E3285902CA004F9C93 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				706A92E4285902CB004F9C93 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -66,8 +62,8 @@
 			children = (
 				707EC1932852DD2A00F18516 /* WiFi_AnalyzerApp.swift */,
 				707EC1952852DD2A00F18516 /* ContentView.swift */,
+				70D4742928629548005C6E0A /* WiFi_Analyzer.entitlements */,
 				707EC1972852DD2D00F18516 /* Assets.xcassets */,
-				707EC19C2852DD2D00F18516 /* WiFi_Analyzer.entitlements */,
 				707EC1992852DD2D00F18516 /* Preview Content */,
 			);
 			path = "WiFi Analyzer";
@@ -278,6 +274,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WiFi Analyzer/WiFi_Analyzer.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -307,6 +304,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "WiFi Analyzer/WiFi_Analyzer.entitlements";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
